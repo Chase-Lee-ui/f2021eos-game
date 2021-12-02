@@ -2,28 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Controller : MonoBehaviour
+public class Infected_Controller : Player_Controller
 {
-    public float MoveSpeed;
-    public float TurnSpeed;
-    public float JumpHeight = 10f;
-    protected Rigidbody PlayerBody;
-    protected bool OnGround;
-    private float MaxSpeed = 20.0f;
-    void Start ()
+    public float Timer;
+    public float TimerCap;
+    public float MaxSpeed;
+    public override void Update()
     {
-        this.PlayerBody = this.gameObject.GetComponent<Rigidbody>();
+        
     }
-    // Update is called once per frame
-    public virtual void Update ()
+
+    void FixedUpdate()
     {
-        if(this.OnGround && Input.GetKeyDown(KeyCode.Space))
+        if(this.OnGround && Input.GetKey(KeyCode.Space))
         {
-            this.PlayerBody.AddForce(Vector3.up * this.JumpHeight);
-            this.OnGround = false;
+            if(this.Timer <= this.TimerCap)
+            {
+                this.Timer +=  Time.deltaTime * 2;
+            }
         }
-        //Moves Forward and back along z axis                           //Up/Down
-        var vertInput = Input.GetAxis("Vertical");
+        else
+        {
+            var vertInput = Input.GetAxis("Vertical");
+            this.PlayerBody.AddForce(Vector3.up * this.JumpHeight * this.Timer);
+            this.Timer = 0;
             //Moves Forward and back along z axis                           //Up/Down
             this.PlayerBody.AddRelativeForce(Vector3.forward * vertInput * this.MoveSpeed, ForceMode.Impulse);
             if(!this.OnGround)
@@ -40,16 +42,11 @@ public class Player_Controller : MonoBehaviour
             {
                 this.PlayerBody.velocity = new Vector3(this.PlayerBody.velocity.x / 2.0f, this.PlayerBody.velocity.y, this.PlayerBody.velocity.z / 2.0f);
             }
-        //Moves Left and right along x Axis                               //Left/Right
-        transform.Rotate(Vector3.up, this.TurnSpeed*Input.GetAxis("Horizontal")*Time.deltaTime);      
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Ground"))
-        {
-            this.OnGround = true;
+            
         }
+        //Moves Left and right along x Axis                               //Left/Right
+        transform.Rotate(Vector3.up, this.TurnSpeed*Input.GetAxis("Horizontal")*Time.deltaTime);
     }
 
     private void OnCollisionExit(Collision collision)
