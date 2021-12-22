@@ -4,34 +4,39 @@ using UnityEngine;
 
 public class Player_Controller : MonoBehaviour
 {
-    public float MoveSpeed;
-    public float TurnSpeed;
-    public float JumpHeight = 10f;
-    private Rigidbody PlayerBody;
-    private bool OnGround;
-    void Start ()
-    {
-        this.PlayerBody = this.gameObject.GetComponent<Rigidbody>();
-    }
+    public CharacterController Controller;
+    public float Speed = 12.0f;
+    public float Gravity = -9.81f;
+    public float JumpHeight = 3.0f;
+    public Transform GroundCheck;
+    public float GroundDistance = 0.4f;
+    public LayerMask GroundMask;
+    Vector3 Velocity;
+    public bool IsGrounded;
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
-        if(this.OnGround && Input.GetKeyDown(KeyCode.Space))
-        {
-            this.PlayerBody.AddForce(Vector3.up * this.JumpHeight);
-            this.OnGround = false;
-        }
-        //Moves Forward and back along z axis                           //Up/Down
-        transform.Translate(Vector3.forward * Time.deltaTime * Input.GetAxis("Vertical")* this.MoveSpeed);
-        //Moves Left and right along x Axis                               //Left/Right
-        transform.Rotate(Vector3.up, this.TurnSpeed*Input.GetAxis("Horizontal")*Time.deltaTime);      
-    }
+        this.IsGrounded = Physics.CheckSphere(this.GroundCheck.position, this.GroundDistance, this.GroundMask);
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Ground"))
+        if(this.IsGrounded && this.Velocity.y < 0)
         {
-            this.OnGround = true;
+            this.Velocity.y = -2f;
         }
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        this.Controller.Move(move * this.Speed * Time.deltaTime);
+
+        if(Input.GetKeyDown("space") && this.IsGrounded)
+        {
+            this.Velocity.y = Mathf.Sqrt(this.JumpHeight * -2.0f * this.Gravity);
+        }
+
+        this.Velocity.y += this.Gravity * Time.deltaTime;
+
+        this.Controller.Move(this.Velocity * Time.deltaTime);
     }
 }

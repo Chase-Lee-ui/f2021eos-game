@@ -1,25 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private Camera fpsCam;
+    [SerializeField] private float damage;
+    [SerializeField] private int ammo;
+    [SerializeField] private int maxClipSize;
 
-    private Rigidbody rb;
+    [SerializeField] private TextMeshProUGUI ammoText;
 
-    // Start is called before the first frame update
-    void Start()
+    private int ammoLeft;
+
+    private void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        ammoLeft = maxClipSize;
+        UpdateAmmoText();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetButtonDown("Fire1"))
         {
-            Instantiate(bullet, transform.position, transform.rotation);
+            if (ammoLeft > 0)
+            {
+                Shoot();
+            }
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Reload();
+        }
+    }
+
+    private void Shoot()
+    {
+        ammoLeft -= 1;
+        UpdateAmmoText();
+        RaycastHit hit;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, 200))
+        {
+            Health health = hit.transform.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+        }
+    }
+
+    private void Reload()
+    {
+        int ammoToRemove = maxClipSize - ammoLeft;
+        ammo -= ammoToRemove;
+        ammoLeft = maxClipSize;
+        UpdateAmmoText();
+    }
+
+    void UpdateAmmoText()
+    {
+        ammoText.text = GetAmmoText();
+    }
+
+    string GetAmmoText()
+    {
+        return "Ammo " + ammoLeft + "/" + ammo;
     }
 }
