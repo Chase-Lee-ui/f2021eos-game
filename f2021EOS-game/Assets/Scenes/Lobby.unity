@@ -1476,6 +1476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   createInput: {fileID: 324751455}
   joinInput: {fileID: 606032190}
+  SceneName: Map_Test_2
 --- !u!4 &1575469290
 Transform:
   m_ObjectHideFlags: 0

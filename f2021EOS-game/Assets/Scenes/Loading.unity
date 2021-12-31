@@ -655,6 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b4cd6d44e798842b9988aa4b77cf45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SceneName: Lobby
 --- !u!4 &1600078527
 Transform:
   m_ObjectHideFlags: 0
