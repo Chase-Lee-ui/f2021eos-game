@@ -1,0 +1,13 @@
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\bin\Debug\netcoreapp3.1\TestConsoleApp.exe
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\bin\Debug\netcoreapp3.1\TestConsoleApp.deps.json
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\bin\Debug\netcoreapp3.1\TestConsoleApp.runtimeconfig.json
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\bin\Debug\netcoreapp3.1\TestConsoleApp.runtimeconfig.dev.json
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\bin\Debug\netcoreapp3.1\TestConsoleApp.dll
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\bin\Debug\netcoreapp3.1\TestConsoleApp.pdb
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\obj\Debug\netcoreapp3.1\TestConsoleApp.csprojAssemblyReference.cache
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\obj\Debug\netcoreapp3.1\TestConsoleApp.AssemblyInfoInputs.cache
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\obj\Debug\netcoreapp3.1\TestConsoleApp.AssemblyInfo.cs
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\obj\Debug\netcoreapp3.1\TestConsoleApp.csproj.CoreCompileInputs.cache
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\obj\Debug\netcoreapp3.1\TestConsoleApp.dll
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\obj\Debug\netcoreapp3.1\TestConsoleApp.pdb
+C:\Users\Marc\Desktop\Unity Projects\f2021eos-game\f2021EOS-game\TestConsoleApp\obj\Debug\netcoreapp3.1\TestConsoleApp.genruntimeconfig.cache
