@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -13,7 +14,15 @@ public class Player_Controller : MonoBehaviour
     public LayerMask GroundMask;
     Vector3 Velocity;
     public bool IsGrounded;
+    PhotonView View;
+    public Camera LocalCamera;
     // Update is called once per frame
+
+    private void Start()
+    {
+        View = GetComponent<PhotonView>();
+        if(View.IsMine) LocalCamera.enabled = true;
+    }
     void Update()
     {
         this.IsGrounded = Physics.CheckSphere(this.GroundCheck.position, this.GroundDistance, this.GroundMask);
@@ -23,20 +32,23 @@ public class Player_Controller : MonoBehaviour
             this.Velocity.y = -2f;
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        this.Controller.Move(move * this.Speed * Time.deltaTime);
-
-        if(Input.GetKeyDown("space") && this.IsGrounded)
+        if(View.IsMine)
         {
-            this.Velocity.y = Mathf.Sqrt(this.JumpHeight * -2.0f * this.Gravity);
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector3 move = transform.right * x + transform.forward * z;
+
+            this.Controller.Move(move * this.Speed * Time.deltaTime);
+
+            if(Input.GetKeyDown("space") && this.IsGrounded)
+            {
+                this.Velocity.y = Mathf.Sqrt(this.JumpHeight * -2.0f * this.Gravity);
+            }
+
+            this.Velocity.y += this.Gravity * Time.deltaTime;
+
+            this.Controller.Move(this.Velocity * Time.deltaTime);
         }
-
-        this.Velocity.y += this.Gravity * Time.deltaTime;
-
-        this.Controller.Move(this.Velocity * Time.deltaTime);
     }
 }
