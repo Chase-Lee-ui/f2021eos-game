@@ -9,6 +9,8 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public InputField createInput;
     public InputField joinInput;
 
+    public string SceneName;
+
     public void CreateRoom()
     {
         PhotonNetwork.CreateRoom(createInput.text);
@@ -21,6 +23,6 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Game");
+        PhotonNetwork.LoadLevel(SceneName);
     }
 }

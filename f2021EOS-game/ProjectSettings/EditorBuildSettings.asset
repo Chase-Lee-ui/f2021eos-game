@@ -12,12 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/UI.unity
     guid: ecf5fdba643b3fa4a9330df5a863750f
   - enabled: 1
-    path: Assets/Scenes/Multiplayer_Test/Loading.unity
-    guid: aebae32ddb7c2c746bc254062bf25e4c
+    path: Assets/Scenes/Loading.unity
+    guid: 00936202934056749b29244a35c99105
   - enabled: 1
-    path: Assets/Scenes/Multiplayer_Test/Lobby.unity
-    guid: d7362b6696239554a9ca0d861a267937
+    path: Assets/Scenes/Lobby.unity
+    guid: 4fc0acd584203344abde7ecd1caaf513
   - enabled: 1
-    path: Assets/Scenes/Multiplayer_Test/Game.unity
-    guid: 71aee8a8ca44f2d4e98e3a8f1772b8df
+    path: Assets/Scenes/Map_Test_2.unity
+    guid: 787ec408935c6f4479e1c1dfa295cf55
   m_configObjects: {}
