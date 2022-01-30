@@ -6,11 +6,16 @@ using Photon.Pun;
 public class Player_Controller : MonoBehaviour
 {
     private CharacterController controller;
-    private float verticalVelocity;
-    private float groundedTimer;        // to allow jumping when going down ramps
+    public float verticalVelocity;  // change this back to private
+    public float groundedTimer;        // to allow jumping when going down ramps (Change this back to private)
+    public float airTimer; // To check how long the player is in the air (Change this back to private)
     public float playerSpeed;
     public float jumpHeight;
     private float gravityValue = 9.81f;
+    public float maxYPos = 0.0f; // (Change this back to private)
+    private float fallSpeed = 0.0f;
+    private float fallDistance = 0.0f;
+    private float fallDamage = 0.0f;
 
     private void Start()
     {
@@ -21,20 +26,32 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
         bool groundedPlayer = controller.isGrounded;
+        if (maxYPos < transform.position.y && airTimer >= 0.9f) 
+        {
+            maxYPos = transform.position.y;
+        }
         if (groundedPlayer)
         {
             // cooldown interval to allow reliable jumping even whem coming down ramps
             groundedTimer = 0.2f;
+            maxYPos = 0.0f;
+            airTimer = 0.0f;
         }
         if (groundedTimer > 0)
         {
             groundedTimer -= Time.deltaTime;
         }
-
+        if (groundedTimer == 0.0f) 
+        {
+            airTimer += Time.deltaTime;
+        }
         // slam into the ground
         if (groundedPlayer && verticalVelocity < 0)
         {
             // hit ground
+            fallSpeed = verticalVelocity * -1;
+            fallDistance = maxYPos - transform.position.y;
+            fallDamage = fallDistance / fallSpeed;
             verticalVelocity = 0f;
         }
 
